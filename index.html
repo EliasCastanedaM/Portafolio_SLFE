@@ -1,0 +1,1376 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      SLFE Enterprise | Webs, sistemas y automatización para negocios
+    </title>
+    <meta
+      name="description"
+      content="SLFE Enterprise crea páginas web, catálogos con carrito, sistemas de reservas, apps y automatización con WhatsApp para negocios. Implementaciones desde S/200."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #070b16;
+        --bg-soft: #0d1424;
+        --card: rgba(255, 255, 255, 0.075);
+        --card-strong: rgba(255, 255, 255, 0.12);
+        --text: #f8fafc;
+        --muted: #a8b3c7;
+        --primary: #38bdf8;
+        --primary-2: #2563eb;
+        --green: #22c55e;
+        --yellow: #facc15;
+        --border: rgba(255, 255, 255, 0.14);
+        --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(56, 189, 248, 0.22),
+            transparent 34%
+          ),
+          radial-gradient(
+            circle at top right,
+            rgba(37, 99, 235, 0.25),
+            transparent 30%
+          ),
+          linear-gradient(180deg, #050816 0%, #08111f 42%, #050816 100%);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .container {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(18px);
+        background: rgba(7, 11, 22, 0.78);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-content {
+        min-height: 78px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+      }
+
+      .brand img {
+        width: 44px;
+        height: 44px;
+        object-fit: cover;
+        border-radius: 12px;
+        background: #020617;
+        border: 1px solid rgba(56, 189, 248, 0.45);
+        box-shadow: 0 12px 30px rgba(56, 189, 248, 0.22);
+      }
+
+      .brand small {
+        display: block;
+        color: var(--muted);
+        font-weight: 700;
+        letter-spacing: 0;
+        font-size: 0.78rem;
+        margin-top: 2px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        color: var(--muted);
+        font-weight: 700;
+        font-size: 0.94rem;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        padding: 13px 20px;
+        font-weight: 900;
+        cursor: pointer;
+        transition: 0.25s ease;
+        white-space: nowrap;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        color: white;
+        box-shadow: 0 18px 40px rgba(37, 99, 235, 0.35);
+      }
+
+      .btn-primary:hover,
+      .btn-ghost:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary:hover {
+        box-shadow: 0 22px 55px rgba(37, 99, 235, 0.45);
+      }
+
+      .btn-ghost {
+        border-color: var(--border);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+      }
+
+      .btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .hero {
+        padding: 92px 0 70px;
+        position: relative;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 56px;
+        align-items: center;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        border-radius: 999px;
+        background: rgba(56, 189, 248, 0.12);
+        color: #bae6fd;
+        border: 1px solid rgba(56, 189, 248, 0.25);
+        font-weight: 900;
+        font-size: 0.86rem;
+        margin-bottom: 22px;
+      }
+
+      h1 {
+        font-size: clamp(2.65rem, 6vw, 5.65rem);
+        line-height: 0.95;
+        letter-spacing: -0.08em;
+        margin-bottom: 24px;
+      }
+
+      .gradient-text {
+        background: linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #7dd3fc 48%,
+          #60a5fa 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .hero p,
+      .section-header p,
+      .about-card p,
+      .project-content p,
+      .service p,
+      .process p,
+      .result-card p,
+      .audience-card p,
+      .cta p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .hero p {
+        font-size: 1.12rem;
+        max-width: 650px;
+        margin-bottom: 30px;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 34px;
+      }
+
+      .trust-line {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        color: #dbeafe;
+        font-weight: 800;
+        margin-bottom: 22px;
+      }
+
+      .trust-line span {
+        color: var(--green);
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        max-width: 650px;
+      }
+
+      .stat {
+        padding: 18px;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.055);
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.42rem;
+        margin-bottom: 5px;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 0.86rem;
+        line-height: 1.4;
+      }
+
+      .hero-card {
+        position: relative;
+        border: 1px solid var(--border);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.12),
+          rgba(255, 255, 255, 0.045)
+        );
+        border-radius: 34px;
+        padding: 22px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        inset: -80px -80px auto auto;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: rgba(56, 189, 248, 0.25);
+        filter: blur(12px);
+      }
+
+      .cover-img {
+        position: relative;
+        width: 100%;
+        min-height: 210px;
+        object-fit: cover;
+        border-radius: 24px;
+        margin-bottom: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .mockup {
+        position: relative;
+        border-radius: 28px;
+        background: #0b1120;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        overflow: hidden;
+      }
+
+      .mockup-top {
+        height: 52px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 18px;
+        background: rgba(255, 255, 255, 0.055);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      }
+
+      .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.35);
+      }
+
+      .mockup-body {
+        padding: 24px;
+      }
+
+      .dashboard-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .dashboard-title h3 {
+        font-size: 1.2rem;
+      }
+
+      .status-pill {
+        color: #bbf7d0;
+        background: rgba(34, 197, 94, 0.13);
+        border: 1px solid rgba(34, 197, 94, 0.28);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .mini-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .mini-card {
+        min-height: 112px;
+        border-radius: 22px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.075);
+        border: 1px solid rgba(255, 255, 255, 0.11);
+      }
+
+      .mini-card .icon {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+      }
+
+      .mini-card h4 {
+        margin-bottom: 6px;
+      }
+
+      .mini-card p {
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .section {
+        padding: 74px 0;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 28px;
+        margin-bottom: 32px;
+      }
+
+      .section-kicker {
+        color: #7dd3fc;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.82rem;
+        margin-bottom: 12px;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        letter-spacing: -0.06em;
+        line-height: 1.02;
+      }
+
+      .section-header p {
+        max-width: 470px;
+      }
+
+      .about,
+      .results,
+      .audience,
+      .process-grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .about {
+        grid-template-columns: 0.95fr 1.05fr;
+      }
+
+      .about-card,
+      .result-card,
+      .audience-card,
+      .process {
+        padding: 30px;
+        border-radius: 30px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.24);
+      }
+
+      .about-card h3,
+      .result-card h3,
+      .audience-card h3,
+      .process h3 {
+        font-size: 1.42rem;
+        margin-bottom: 14px;
+        letter-spacing: -0.03em;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .tag {
+        padding: 9px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #dbeafe;
+        font-size: 0.86rem;
+        font-weight: 800;
+      }
+
+      .results,
+      .audience,
+      .projects {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .result-card strong {
+        display: block;
+        font-size: 2.1rem;
+        color: #bfdbfe;
+        letter-spacing: -0.05em;
+        margin-bottom: 8px;
+      }
+
+      .audience-card .emoji,
+      .process .step {
+        display: inline-grid;
+        place-items: center;
+        width: 46px;
+        height: 46px;
+        border-radius: 16px;
+        background: rgba(56, 189, 248, 0.13);
+        margin-bottom: 18px;
+        font-size: 1.3rem;
+        font-weight: 900;
+      }
+
+      .projects {
+        display: grid;
+        gap: 20px;
+      }
+
+      .project {
+        position: relative;
+        overflow: hidden;
+        border-radius: 32px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+        transition: 0.28s ease;
+      }
+
+      .project:hover {
+        transform: translateY(-8px);
+        background: var(--card-strong);
+      }
+
+      .project-visual {
+        min-height: 190px;
+        padding: 20px;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(56, 189, 248, 0.22),
+            rgba(37, 99, 235, 0.12)
+          ),
+          rgba(255, 255, 255, 0.04);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .browser-box {
+        height: 150px;
+        border-radius: 20px;
+        background: rgba(7, 11, 22, 0.88);
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        padding: 14px;
+      }
+
+      .line {
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        margin-bottom: 10px;
+      }
+
+      .line.w1 {
+        width: 82%;
+      }
+      .line.w2 {
+        width: 58%;
+      }
+      .line.w3 {
+        width: 72%;
+      }
+      .line.w4 {
+        width: 45%;
+      }
+
+      .cards-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .fake-card {
+        height: 48px;
+        border-radius: 12px;
+        background: rgba(56, 189, 248, 0.16);
+        border: 1px solid rgba(56, 189, 248, 0.18);
+      }
+
+      .project-content {
+        padding: 24px;
+      }
+
+      .project-content h3 {
+        font-size: 1.35rem;
+        margin-bottom: 12px;
+        letter-spacing: -0.03em;
+      }
+
+      .project-content p {
+        margin-bottom: 18px;
+        font-size: 0.95rem;
+      }
+
+      .project-list {
+        list-style: none;
+        display: grid;
+        gap: 9px;
+        margin-bottom: 20px;
+        color: #dbeafe;
+        font-size: 0.91rem;
+      }
+
+      .project-list li::before {
+        content: "✓";
+        color: var(--green);
+        font-weight: 900;
+        margin-right: 9px;
+      }
+
+      .project-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .services {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .service {
+        padding: 22px;
+        min-height: 170px;
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border);
+      }
+
+      .service span {
+        display: inline-grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 16px;
+        background: rgba(56, 189, 248, 0.13);
+        margin-bottom: 18px;
+        font-size: 1.3rem;
+      }
+
+      .service h3 {
+        margin-bottom: 10px;
+      }
+
+      .service p {
+        font-size: 0.92rem;
+      }
+
+      .process-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .price-card {
+        margin-top: 22px;
+        padding: 24px;
+        border-radius: 28px;
+        background: rgba(250, 204, 21, 0.09);
+        border: 1px solid rgba(250, 204, 21, 0.22);
+      }
+
+      .price-card strong {
+        color: #fde68a;
+        font-size: 1.35rem;
+      }
+
+      .cta {
+        padding: 54px;
+        border-radius: 38px;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(56, 189, 248, 0.24),
+            transparent 38%
+          ),
+          linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.12),
+            rgba(255, 255, 255, 0.045)
+          );
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        text-align: center;
+      }
+
+      .cta h2 {
+        margin-bottom: 16px;
+      }
+
+      .cta p {
+        max-width: 700px;
+        margin: 0 auto 26px;
+      }
+
+      footer {
+        padding: 34px 0;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 960px) {
+        .hero-grid,
+        .about {
+          grid-template-columns: 1fr;
+        }
+
+        .projects,
+        .services,
+        .results,
+        .audience,
+        .process-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .section-header {
+          align-items: start;
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .container {
+          width: min(100% - 28px, 1180px);
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 56px;
+        }
+
+        .stats,
+        .projects,
+        .services,
+        .results,
+        .audience,
+        .process-grid,
+        .mini-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cta {
+          padding: 34px 22px;
+        }
+
+        .project-actions .btn {
+          width: 100%;
+        }
+        .project-visual img {
+  transition: 0.3s;
+}
+
+.project-visual img:hover {
+  transform: scale(1.04);
+}
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="nav">
+      <div class="container nav-content">
+        <a class="brand" href="#inicio">
+          <img src="assets/logo-slfe.png" alt="Logo de SLFE Enterprise" />
+          <div>
+            <div>SLFE Enterprise</div>
+            <small>Soluciones digitales para negocios</small>
+          </div>
+        </a>
+
+        <nav class="nav-links" aria-label="Navegación principal">
+          <a href="#empresa">Empresa</a>
+          <a href="#proyectos">Demos</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+
+        <a
+          class="btn btn-primary"
+          id="navWhatsapp"
+          target="_blank"
+          rel="noopener"
+          >Cotizar por WhatsApp</a
+        >
+      </div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="badge">
+              🚀 Webs, sistemas y automatización listos para vender más
+            </div>
+            <h1>
+              Convierte tu negocio en una
+              <span class="gradient-text">máquina de ventas digital</span>
+            </h1>
+            <p>
+              Creamos páginas web, catálogos con carrito, sistemas de reservas,
+              apps y automatizaciones con WhatsApp para que barberías,
+              restaurantes, tiendas y empresas reciban más consultas, pedidos y
+              clientes desde internet.
+            </p>
+
+            <div class="trust-line">
+              <span>●</span> Implementación disponible esta semana · Planes
+              desde S/200 según alcance
+            </div>
+
+            <div class="hero-actions">
+              <a
+                class="btn btn-primary"
+                id="heroWhatsapp"
+                target="_blank"
+                rel="noopener"
+                >Solicitar demo</a
+              >
+              <a class="btn btn-ghost" href="#proyectos">Ver demos listas</a>
+            </div>
+
+            <div class="stats">
+              <div class="stat">
+                <strong>24–48h</strong>
+                <span>Lanzamiento rápido para versiones base</span>
+              </div>
+              <div class="stat">
+                <strong>Desde S/200</strong>
+                <span>Implementaciones según solución y alcance</span>
+              </div>
+              <div class="stat">
+                <strong>WhatsApp</strong>
+                <span>Consultas, reservas y pedidos directos</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <img
+              class="cover-img"
+              src="assets/logo-slfe.png"
+              alt="Portada de SLFE Enterprise"
+            />
+
+            <div class="mockup">
+              <div class="mockup-top">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              <div class="mockup-body">
+                <div class="dashboard-title">
+                  <h3>Soluciones SLFE</h3>
+                  <span class="status-pill">Listo para vender</span>
+                </div>
+                <div class="mini-grid">
+                  <div class="mini-card">
+                    <div class="icon">🌐</div>
+                    <h4>Webs</h4>
+                    <p>Páginas para presentar tu negocio y captar clientes.</p>
+                  </div>
+                  <div class="mini-card">
+                    <div class="icon">🛒</div>
+                    <h4>Catálogo</h4>
+                    <p>Productos, carrito y pedidos por WhatsApp.</p>
+                  </div>
+                  <div class="mini-card">
+                    <div class="icon">📅</div>
+                    <h4>Reservas</h4>
+                    <p>Agenda para barberías, restaurantes y servicios.</p>
+                  </div>
+                  <div class="mini-card">
+                    <div class="icon">⚙️</div>
+                    <h4>Sistemas</h4>
+                    <p>Inventario, procesos, apps y automatización.</p>
+                  </div>
+                </div>
+                <a
+                  class="btn btn-primary"
+                  style="width: 100%"
+                  id="mockWhatsapp"
+                  target="_blank"
+                  rel="noopener"
+                  >Solicitar implementación</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="empresa">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <div class="section-kicker">Sobre la empresa</div>
+              <h2>
+                Desarrollo rápido para negocios que necesitan vender, reservar y
+                atender mejor.
+              </h2>
+            </div>
+            <p>
+              SLFE Enterprise une diseño profesional, sistemas funcionales y
+              automatización comercial para que tu negocio no solo tenga una
+              página bonita, sino una herramienta real de ventas.
+            </p>
+          </div>
+
+          <div class="about">
+            <div class="about-card">
+              <h3>¿Qué hacemos?</h3>
+              <p>
+                Creamos soluciones digitales listas para implementar: páginas
+                web, catálogos con carrito, sistemas de reservas, apps móviles,
+                sistemas personalizados y flujos de atención por WhatsApp.
+              </p>
+              <p>
+                Partimos de demos ya construidas para reducir tiempos, adaptar
+                rápido la marca del cliente y entregar una solución funcional
+                sin empezar desde cero.
+              </p>
+              <div class="tags">
+                <span class="tag">Páginas web</span>
+                <span class="tag">Catálogo con carrito</span>
+                <span class="tag">Reservas</span>
+                <span class="tag">WhatsApp</span>
+              </div>
+            </div>
+
+            <div class="about-card">
+              <h3>¿Por qué funciona?</h3>
+              <p>
+                Muchos negocios reciben clientes por redes sociales, pero
+                pierden ventas por no tener una presentación clara, un catálogo
+                ordenado o un proceso simple para reservar y consultar.
+              </p>
+              <p>
+                SLFE convierte tus redes en un canal de venta más profesional:
+                el cliente ve tu negocio, entiende tu oferta y te escribe
+                directo con un mensaje preparado.
+              </p>
+              <div class="tags">
+                <span class="tag">Rápido de lanzar</span>
+                <span class="tag">Orientado a ventas</span>
+                <span class="tag">Diseño premium</span>
+                <span class="tag">Escalable</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <div class="section-kicker">Resultados esperados</div>
+              <h2>Tu página debe ayudarte a vender, no solo verse bonita.</h2>
+            </div>
+            <p>
+              Cada solución está pensada para reducir fricción: menos preguntas
+              repetidas, mejor presentación y más clientes llegando al WhatsApp
+              del negocio.
+            </p>
+          </div>
+
+          <div class="results">
+            <div class="result-card">
+              <strong>+ consultas</strong>
+              <p>
+                Botones directos a WhatsApp con mensajes preparados para que el
+                cliente pregunte sin complicarse.
+              </p>
+            </div>
+            <div class="result-card">
+              <strong>+ orden</strong>
+              <p>
+                Servicios, productos, precios, horarios y datos del negocio
+                organizados en una experiencia clara.
+              </p>
+            </div>
+            <div class="result-card">
+              <strong>+ confianza</strong>
+              <p>
+                Una presencia digital profesional hace que el cliente perciba
+                mejor tu marca antes de escribirte.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <div class="section-kicker">Clientes ideales</div>
+              <h2>
+                Soluciones listas para negocios que quieren empezar a vender
+                mejor.
+              </h2>
+            </div>
+            <p>
+              Adaptamos el contenido, colores, logo, imágenes y WhatsApp para
+              que cada demo se convierta en una herramienta real para el
+              cliente.
+            </p>
+          </div>
+
+          <div class="audience">
+            <div class="audience-card">
+              <div class="emoji">💈</div>
+              <h3>Barberías</h3>
+              <p>
+                Reservas, horarios, servicios, ubicación, staff y confirmación
+                directa por WhatsApp.
+              </p>
+            </div>
+            <div class="audience-card">
+              <div class="emoji">🍽️</div>
+              <h3>Restaurantes</h3>
+              <p>
+                Menú digital, reservas, promociones, pedidos y contacto rápido
+                desde redes sociales.
+              </p>
+            </div>
+            <div class="audience-card">
+              <div class="emoji">🛍️</div>
+              <h3>Tiendas y emprendedores</h3>
+              <p>
+                Catálogo visual, carrito simple y pedido completo enviado al
+                WhatsApp del negocio.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="proyectos">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <div class="section-kicker">Demos listas</div>
+              <h2>
+                El cliente ve la demo, elige su estilo y la adaptamos a su
+                marca.
+              </h2>
+            </div>
+            <p>
+              Estas soluciones están preparadas para vender rápido: solo se
+              reemplazan textos, colores, imágenes, logo, servicios, productos y
+              número de WhatsApp.
+            </p>
+          </div>
+
+          
+            </article>
+
+            <div class="projects">
+
+  <!-- PROYECTO 1 -->
+  <article class="project">
+    <div class="project-visual">
+      <a href="https://eliascastanedam.github.io/elias-tech-demo/" target="_blank">
+        <img src="assets/demo-empresa.jpg" style="width:100%; border-radius:16px;" />
+      </a>
+    </div>
+    <div class="project-content">
+      <h3>Web profesional para conseguir clientes</h3>
+      <p>
+        Página web moderna para mostrar tu negocio y recibir clientes directamente desde WhatsApp.
+      </p>
+      <ul class="project-list">
+        <li>Ideal para negocios sin presencia online</li>
+        <li>Diseño moderno y responsive</li>
+        <li>Botón directo a WhatsApp</li>
+      </ul>
+      <div class="project-actions">
+        <a class="btn btn-ghost"
+           href="https://eliascastanedam.github.io/elias-tech-demo/"
+           target="_blank">
+          Ver demo
+        </a>
+        <a class="btn btn-primary project-whatsapp"
+           data-project="Página web profesional">
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </article>
+
+
+  <!-- PROYECTO 2 -->
+  <article class="project">
+    <div class="project-visual">
+      <a href="https://eliascastanedam.github.io/barber-booking-system/" target="_blank">
+        <img src="assets/demo-reservas.png" style="width:100%; border-radius:16px;" />
+      </a>
+    </div>
+    <div class="project-content">
+      <h3>Sistema de reservas</h3>
+      <p>
+        Agenda digital para barberías, restaurantes y servicios con reservas directas por WhatsApp.
+      </p>
+      <ul class="project-list">
+        <li>Servicios y horarios disponibles</li>
+        <li>Reserva rápida desde celular</li>
+        <li>Confirmación por WhatsApp</li>
+      </ul>
+      <div class="project-actions">
+        <a class="btn btn-ghost"
+           href="https://eliascastanedam.github.io/barber-booking-system/"
+           target="_blank">
+          Ver demo
+        </a>
+        <a class="btn btn-primary project-whatsapp"
+           data-project="Sistema de reservas">
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </article>
+
+
+  <!-- PROYECTO 3 -->
+  <article class="project">
+    <div class="project-visual">
+      <a href="https://eliascastanedam.github.io/demo_catalogo/" target="_blank">
+        <img src="assets/demo-catalogo.png" style="width:100%; border-radius:16px;" />
+      </a>
+    </div>
+    <div class="project-content">
+      <h3>Catálogo con carrito</h3>
+      <p>
+        Catálogo web con carrito donde el cliente arma su pedido y lo envía por WhatsApp.
+      </p>
+      <ul class="project-list">
+        <li>Productos organizados por categoría</li>
+        <li>Carrito visual con cantidades</li>
+        <li>Pedido final directo al WhatsApp</li>
+      </ul>
+      <div class="project-actions">
+        <a class="btn btn-ghost"
+           href="https://eliascastanedam.github.io/demo_catalogo/"
+           target="_blank">
+          Ver demo
+        </a>
+        <a class="btn btn-primary project-whatsapp"
+           data-project="Catálogo con carrito">
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </article>
+
+</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="servicios">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <div class="section-kicker">Servicios</div>
+              <h2>Todo lo que SLFE puede implementar.</h2>
+            </div>
+            <p>
+              Puedes empezar con una solución base y luego crecer hacia sistemas
+              más avanzados para controlar procesos, ventas, inventario o
+              atención al cliente.
+            </p>
+          </div>
+
+          <div class="services">
+            <div class="service">
+              <span>🌐</span>
+              <h3>Páginas web</h3>
+              <p>
+                Landing pages y sitios profesionales para presentar empresas,
+                servicios y marcas.
+              </p>
+            </div>
+            <div class="service">
+              <span>🛒</span>
+              <h3>Catálogo + carrito</h3>
+              <p>
+                Productos, categorías, carrito y pedido final enviado por
+                WhatsApp.
+              </p>
+            </div>
+            <div class="service">
+              <span>📲</span>
+              <h3>WhatsApp automático</h3>
+              <p>
+                Mensajes preparados para consultas, reservas, pedidos y atención
+                rápida.
+              </p>
+            </div>
+            <div class="service">
+              <span>📱</span>
+              <h3>Apps móviles</h3>
+              <p>
+                Aplicaciones para negocios que necesitan una experiencia más
+                completa.
+              </p>
+            </div>
+            <div class="service">
+              <span>⚙️</span>
+              <h3>Sistemas personalizados</h3>
+              <p>
+                Flujos hechos a medida para procesos internos, registros y
+                operaciones.
+              </p>
+            </div>
+            <div class="service">
+              <span>📦</span>
+              <h3>Inventario / ERP</h3>
+              <p>
+                Sistemas para controlar productos, movimientos, stock y
+                trazabilidad.
+              </p>
+            </div>
+            <div class="service">
+              <span>🎨</span>
+              <h3>Personalización visual</h3>
+              <p>
+                Adaptamos colores, textos, imágenes, logo y estilo de marca del
+                cliente.
+              </p>
+            </div>
+            <div class="service">
+              <span>⚡</span>
+              <h3>Entrega rápida</h3>
+              <p>
+                Demos listas para reducir tiempos y lanzar en 24–48h según
+                alcance.
+              </p>
+            </div>
+          </div>
+
+          <div class="price-card">
+            <strong>Planes desde S/200 según alcance</strong>
+            <p style="margin-top: 10px; color: var(--muted); line-height: 1.6">
+              Incluye implementación base de una solución lista. Los sistemas
+              más avanzados, apps, inventarios, paneles administrativos o
+              funciones personalizadas se cotizan según el alcance del proyecto.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <div class="section-kicker">Proceso</div>
+              <h2>Así convertimos una demo en una solución para tu negocio.</h2>
+            </div>
+            <p>
+              Un proceso simple para avanzar rápido: entendemos el negocio,
+              adaptamos la demo, conectamos WhatsApp y dejamos la solución lista
+              para compartir.
+            </p>
+          </div>
+
+          <div class="process-grid">
+            <div class="process">
+              <div class="step">1</div>
+              <h3>Elegimos la demo</h3>
+              <p>
+                Identificamos si necesitas web, catálogo, reservas, app o
+                sistema personalizado.
+              </p>
+            </div>
+            <div class="process">
+              <div class="step">2</div>
+              <h3>Adaptamos tu marca</h3>
+              <p>
+                Cambiamos logo, colores, textos, imágenes, servicios, productos
+                y datos del negocio.
+              </p>
+            </div>
+            <div class="process">
+              <div class="step">3</div>
+              <h3>Conectamos WhatsApp</h3>
+              <p>
+                Preparamos mensajes inteligentes para consultas, pedidos,
+                cotizaciones o reservas.
+              </p>
+            </div>
+            <div class="process">
+              <div class="step">4</div>
+              <h3>Lanzamos la solución</h3>
+              <p>
+                Te entregamos un enlace listo para compartir en Facebook,
+                Instagram, WhatsApp y tarjetas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contacto">
+        <div class="container">
+          <div class="cta">
+            <div class="section-kicker">Contacto</div>
+            <h2>¿Quieres una demo lista para tu negocio?</h2>
+            <p>
+              Escríbenos por WhatsApp, cuéntanos qué tipo de negocio tienes y te
+              mostramos una solución que pueda adaptarse a tu marca para empezar
+              a recibir consultas, reservas o pedidos.
+            </p>
+            <a
+              class="btn btn-primary"
+              id="ctaWhatsapp"
+              target="_blank"
+              rel="noopener"
+              >Hablar por WhatsApp</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-content">
+        <div>© 2026 SLFE Enterprise. Sistemas listos para vender más.</div>
+        <div>Web · Catálogo · Reservas · Apps · Sistemas · WhatsApp</div>
+      </div>
+    </footer>
+
+    <script>
+      const phoneNumber = "51938345478";
+
+      const demoLinks = {
+        empresa: "https://eliascastanedam.github.io/elias-tech-demo/",
+        reservas: "https://eliascastanedam.github.io/barber-booking-system/",
+        catalogo: "https://eliascastanedam.github.io/demo_catalogo/",
+      };
+
+      const defaultMessage =
+        "Hola, vi el portafolio de SLFE Enterprise y quiero una demo para mi negocio.";
+
+      function whatsappLink(message) {
+        return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      }
+
+      document
+        .querySelectorAll(
+          "#navWhatsapp, #heroWhatsapp, #mockWhatsapp, #ctaWhatsapp",
+        )
+        .forEach((button) => {
+          button.href = whatsappLink(defaultMessage);
+        });
+
+      document.querySelectorAll(".project-whatsapp").forEach((button) => {
+        const project = button.dataset.project;
+        button.href = whatsappLink(
+          `Hola, vi el portafolio de SLFE Enterprise y quiero cotizar esta solución: ${project}.`,
+        );
+      });
+
+      const demoButtons = document.querySelectorAll(".demo-link");
+      if (demoButtons[0]) demoButtons[0].href = demoLinks.reservas;
+      if (demoButtons[1]) demoButtons[1].href = demoLinks.catalogo;
+    </script>
+  </body>
+</html>
